@@ -28,7 +28,7 @@ class ImageClassifierNet(nn.Module):
         #self.drop_out = nn.Dropout(0.5)
         #self.fc1 = nn.Linear(7*7*64, 1000)
         #self.fc2 = nn.Linear(1000, 10)
-        self.fc = nn.Linear(4*7*7, 10)
+        self.fc = nn.Sequential(nn.Linear(4*7*7, 10))
     def forward(self, X):
         ######################
         #   YOUR CODE HERE   #
@@ -36,5 +36,5 @@ class ImageClassifierNet(nn.Module):
         out = self.layer1(X)
         out = self.layer2(out)
         out = out.reshape(out.size(0), -1)
-        out = self.fc
+        out = self.fc(out)
         return out
